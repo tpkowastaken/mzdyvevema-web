@@ -200,6 +200,7 @@
                           <!-- Mobile Menu Overlay -->
                           <div id="mobile-menu-overlay" class="mobile-menu-overlay">
                             <nav id="mobile-menu" class="mobile-menu">
+                              <button class="mobile-menu-close" aria-label="Close menu"></button>
                               <ul class="mobile-menu-list">
                                 <li><a href="../index.html" class="mobile-menu-item">Úvod</a></li>
                                 <li><a href="../o-nas/index.html" class="mobile-menu-item">O nás</a></li>
@@ -353,6 +354,16 @@
 				toggleMenu();
 			}
 		});
+
+		// Close menu when clicking close button
+		const closeButton = mobileMenuOverlay.querySelector('.mobile-menu-close');
+		if (closeButton) {
+			closeButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				toggleMenu();
+			});
+		}
 
 		// Close menu when clicking a menu item
 		const menuItems = mobileMenuOverlay.querySelectorAll('.mobile-menu-item');

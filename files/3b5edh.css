@@ -11658,7 +11658,7 @@ body:not(.wt-blogpost) .s-hn.wnd-nav-border.s-hn-bottom.hm-hidden .s-w:after {
 .s-hn-slogan:not(.s-hn-sidebar) .h-f .s-c {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
 }

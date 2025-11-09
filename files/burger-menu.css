@@ -26,7 +26,7 @@
 
 /* Mobile Menu Overlay */
 .mobile-menu-overlay {
-	display: none;
+	display: block;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -37,11 +37,13 @@
 	opacity: 0;
 	visibility: hidden;
 	transition: opacity 0.3s ease, visibility 0.3s ease;
+	pointer-events: none;
 }
 
 .mobile-menu-overlay.active {
 	opacity: 1;
 	visibility: visible;
+	pointer-events: auto;
 }
 
 /* Mobile Menu */
@@ -61,6 +63,47 @@
 
 .mobile-menu-overlay.active .mobile-menu {
 	right: 0;
+}
+
+/* Mobile Menu Close Button */
+.mobile-menu-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 30px;
+	height: 30px;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	z-index: 1001;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.mobile-menu-close::before,
+.mobile-menu-close::after {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 2px;
+	background-color: #333;
+	border-radius: 2px;
+	transition: all 0.3s ease;
+}
+
+.mobile-menu-close::before {
+	transform: rotate(45deg);
+}
+
+.mobile-menu-close::after {
+	transform: rotate(-45deg);
+}
+
+.mobile-menu-close:hover::before,
+.mobile-menu-close:hover::after {
+	background-color: #000;
 }
 
 .mobile-menu-list {
@@ -109,6 +152,10 @@
 	}
 	
 	.mobile-menu-overlay {
+		display: none !important;
+	}
+	
+	.mobile-menu-overlay.active {
 		display: none !important;
 	}
 	
