@@ -15,6 +15,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
 
     <link href="../files/0rklmm.css?ph=4e0ce7d1a0" media="print" rel="stylesheet" />
+    <link rel="stylesheet" href="../files/burger-menu.css">
     <link href="../files/2e5qgh.css?ph=4e0ce7d1a0" media="screen and (min-width:100000em)" rel="stylesheet" data-type="cq" disabled />
     <link rel="stylesheet" href="../files/3b5edh.css?ph=4e0ce7d1a0" />
     <link rel="stylesheet" href="../files/2txvmx.css?ph=4e0ce7d1a0" media="screen and (min-width:37.5em)" />
@@ -124,7 +125,7 @@
         <header class="l-h cf">
           <div class="sw cf">
             <div class="sw-c cf">
-              <section data-space="true" class="s s-hn s-hn-default wnd-mt-classic wnd-na-c logo-classic sc-b wnd-w-max wnd-nh-m hm-hidden menu-default">
+              <section data-space="true" class="s s-hn s-hn-custom wnd-mt-classic wnd-na-c logo-classic sc-b wnd-w-max wnd-nh-m hm-hidden menu-default">
                 <div class="s-w">
                   <div class="s-o">
                     <div class="s-bg">
@@ -196,10 +197,28 @@
                               </nav>
                             </div>
                           </div>
+                          
+                          <!-- Mobile Menu Overlay -->
+                          <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+                            <nav id="mobile-menu" class="mobile-menu">
+                              <ul class="mobile-menu-list">
+                                <li><a href="../index.html" class="mobile-menu-item">Úvod</a></li>
+                                <li><a href="../o-nas/index.html" class="mobile-menu-item">O nás</a></li>
+                                <li><a href="index.html" class="mobile-menu-item">Služby</a></li>
+                                <li><a href="../tym/index.html" class="mobile-menu-item">Tým</a></li>
+                                <li><a href="../cenik/index.html" class="mobile-menu-item">Ceník</a></li>
+                                <li><a href="../kontakt/index.html" class="mobile-menu-item">Kontakt</a></li>
+                              </ul>
+                            </nav>
+                          </div>
 
                           <div class="cart-and-mobile">
                             <div id="menu-mobile">
-                              <a href="index.html#" id="menu-submit"><span></span>Menu</a>
+                              <button id="menu-submit" class="burger-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                                <span class="burger-line"></span>
+                                <span class="burger-line"></span>
+                                <span class="burger-line"></span>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -345,5 +364,69 @@
         </footer>
       </div>
     </div>
+    
+<script>
+// Burger Menu Toggle Functionality
+(function() {
+	const burgerToggle = document.getElementById('menu-submit');
+	const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+	const body = document.body;
+	let isMenuOpen = false;
+
+	if (burgerToggle && mobileMenuOverlay) {
+		// Toggle menu function
+		function toggleMenu() {
+			isMenuOpen = !isMenuOpen;
+			
+			if (isMenuOpen) {
+				burgerToggle.classList.add('active');
+				burgerToggle.setAttribute('aria-expanded', 'true');
+				mobileMenuOverlay.classList.add('active');
+				body.classList.add('menu-open');
+			} else {
+				burgerToggle.classList.remove('active');
+				burgerToggle.setAttribute('aria-expanded', 'false');
+				mobileMenuOverlay.classList.remove('active');
+				body.classList.remove('menu-open');
+			}
+		}
+
+		// Toggle on button click
+		burgerToggle.addEventListener('click', function(e) {
+			e.preventDefault();
+			toggleMenu();
+		});
+
+		// Close menu when clicking overlay
+		mobileMenuOverlay.addEventListener('click', function(e) {
+			if (e.target === mobileMenuOverlay) {
+				toggleMenu();
+			}
+		});
+
+		// Close menu when clicking a menu item
+		const menuItems = mobileMenuOverlay.querySelectorAll('.mobile-menu-item');
+		menuItems.forEach(function(item) {
+			item.addEventListener('click', function() {
+				toggleMenu();
+			});
+		});
+
+		// Close menu on escape key
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && isMenuOpen) {
+				toggleMenu();
+			}
+		});
+
+		// Close menu on window resize if switching to desktop
+		window.addEventListener('resize', function() {
+			if (window.innerWidth >= 600 && isMenuOpen) {
+				toggleMenu();
+			}
+		});
+	}
+})();
+</script>
   </body>
 </html>
